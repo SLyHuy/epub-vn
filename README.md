@@ -37,3 +37,19 @@ python epub_fixer.py input.epub output.epub
 3. Tìm tất cả các file mã nguồn giao diện (`.html`, `.xhtml`, `.htm`) và phân tích cấu trúc DOM bằng `BeautifulSoup`.
 4. Tìm đến các khối Text (bỏ qua thẻ Tag) và dùng logic thay thế thông minh (Regex) để thêm một khoảng trắng sau các dấu câu nếu sau nó là chữ/số.
 5. Đóng gói lại mọi thứ thành file EPUB hoàn chỉnh.
+
+## Đóng góp (Contributing)
+
+Mọi đóng góp nhằm cải thiện công cụ đều được hoan nghênh! Bạn có thể đóng góp bằng cách:
+1. Fork dự án này.
+2. Tạo một nhánh mới cho tính năng hoặc bản sửa lỗi của bạn (`git checkout -b feature/tinh-nang-moi`).
+3. Commit các thay đổi (`git commit -m 'Them tinh nang moi'`).
+4. Push lên nhánh của bạn (`git push origin feature/tinh-nang-moi`).
+5. Tạo một Pull Request mới.
+
+Nếu bạn phát hiện lỗi hoặc có đề xuất cải tiến, vui lòng mở một Issue mới.
+
+## Giấy phép (License)
+
+Dự án này được phát hành dưới giấy phép [MIT License](LICENSE).
+
