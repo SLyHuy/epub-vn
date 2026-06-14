@@ -1,55 +1,56 @@
-# EPUB Fixer - Công cụ sửa lỗi khoảng cách dấu câu tiếng Việt
+# EPUB Fixer - Vietnamese Punctuation Spacing Corrector
 
-Đây là công cụ dòng lệnh (CLI) bằng Python giúp tự động sửa lỗi thiếu khoảng trắng sau các dấu câu (như `. , : ; ! ? " ) } ]`) trong file EPUB tiếng Việt. 
+A Python command-line tool (CLI) that automatically fixes missing spaces after punctuation marks (such as `. , : ; ! ? " ) } ]`) in Vietnamese EPUB files.
 
-Công cụ đã được thiết kế tối ưu để không làm hỏng cấu trúc HTML, bỏ qua các trường hợp ngoại lệ như:
-- Tên miền, URL, Email (ví dụ: `google.com`, `user@email.com`)
-- Số thập phân, cấu trúc phân cấp (ví dụ: `3.14`, `1.2.3`, `1,000`)
-- Các từ viết tắt phổ biến (ví dụ: `Tp.HCM`, `PGS.TS.`, `ThS.`, `U.S.A`)
+The tool is optimized to preserve HTML structure and ignores common exceptions, such as:
+- Domain names, URLs, and emails (e.g., `google.com`, `user@email.com`)
+- Decimals and hierarchical numbers (e.g., `3.14`, `1.2.3`, `1,000`)
+- Common abbreviations (e.g., `Tp.HCM`, `PGS.TS.`, `ThS.`, `U.S.A`)
 
-## Cài đặt thư viện yêu cầu
+## Requirements
 
-Trước khi sử dụng, bạn cần đảm bảo máy tính đã cài đặt Python. Sau đó, mở Terminal (hoặc Command Prompt) và chạy lệnh sau để cài các thư viện cần thiết:
+Ensure you have Python installed on your computer. Install the required libraries by running:
 
 ```bash
 pip install beautifulsoup4 lxml
 ```
+*(Note: If you run into PEP 668 externally-managed-environment errors on macOS/Homebrew, you can use a virtual environment: `python3 -m venv .venv && source .venv/bin/activate && pip install beautifulsoup4 lxml` or use the `--break-system-packages` flag).*
 
-## Hướng dẫn sử dụng
+## Usage
 
-Chỉ cần copy và paste dòng lệnh sau vào Terminal, thay thế đường dẫn file tương ứng của bạn.
+Simply copy and run the following command in your terminal, replacing the paths with your files:
 
-**Cú pháp:**
+**Syntax:**
 ```bash
-python epub_fixer.py <đường_dẫn_file_gốc> <đường_dẫn_file_mới>
+python3 epub_fixer.py <path_to_input_epub> <path_to_output_epub>
 ```
 
-**Ví dụ thực tế:**
+**Example:**
 ```bash
-python epub_fixer.py input.epub output.epub
+python3 epub_fixer.py input.epub output.epub
 ```
 
-*Lưu ý: Nếu tên file của bạn có khoảng trắng, hãy đặt tên file trong dấu ngoặc kép (ví dụ: `"sach cua toi.epub"`).*
+*Note: If your filenames contain spaces, wrap them in double quotes (e.g., `"my book.epub"`).*
 
-## Cách công cụ hoạt động
-1. Tool sẽ giải nén file EPUB gốc.
-2. Trích xuất file `mimetype` và đảm bảo nó không bị nén (chế độ Store).
-3. Tìm tất cả các file mã nguồn giao diện (`.html`, `.xhtml`, `.htm`) và phân tích cấu trúc DOM bằng `BeautifulSoup`.
-4. Tìm đến các khối Text (bỏ qua thẻ Tag) và dùng logic thay thế thông minh (Regex) để thêm một khoảng trắng sau các dấu câu nếu sau nó là chữ/số.
-5. Đóng gói lại mọi thứ thành file EPUB hoàn chỉnh.
+## How It Works
 
-## Đóng góp (Contributing)
+1. Unzips the original EPUB file.
+2. Extracts the `mimetype` file and ensures it is kept uncompressed (stored mode).
+3. Scans all content source files (`.html`, `.xhtml`, `.htm`) and parses their DOM using `BeautifulSoup` with the `xml` parser.
+4. Identifies text nodes (skipping tag names/attributes) and applies regex pattern matching to add a space after punctuation if it is immediately followed by a word/number.
+5. Re-compresses everything back into a fully compliant EPUB file.
 
-Mọi đóng góp nhằm cải thiện công cụ đều được hoan nghênh! Bạn có thể đóng góp bằng cách:
-1. Fork dự án này.
-2. Tạo một nhánh mới cho tính năng hoặc bản sửa lỗi của bạn (`git checkout -b feature/tinh-nang-moi`).
-3. Commit các thay đổi (`git commit -m 'Them tinh nang moi'`).
-4. Push lên nhánh của bạn (`git push origin feature/tinh-nang-moi`).
-5. Tạo một Pull Request mới.
+## Contributing
 
-Nếu bạn phát hiện lỗi hoặc có đề xuất cải tiến, vui lòng mở một Issue mới.
+Contributions are welcome! To contribute:
+1. Fork this repository.
+2. Create a new branch for your feature or bug fix (`git checkout -b feature/your-feature-name`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature-name`).
+5. Open a Pull Request.
 
-## Giấy phép (License)
+If you encounter bugs or have feature requests, please open an Issue.
 
-Dự án này được phát hành dưới giấy phép [MIT License](LICENSE).
+## License
 
+This project is licensed under the [MIT License](LICENSE).
